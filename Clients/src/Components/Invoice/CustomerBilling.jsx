@@ -726,6 +726,9 @@ const CustomerBilling = ({
         </div>
       )}
     </div>
+    );
+};
+export default CustomerBilling;
 
 
 
@@ -1015,10 +1018,6 @@ const CustomerBilling = ({
     //     </div>
     //   )}
     // </div>
-  );
-};
-
-export default CustomerBilling;
 
 // import React, { useEffect, useState, useRef } from "react";
 // import { useParams } from "react-router-dom";

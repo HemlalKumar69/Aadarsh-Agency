@@ -601,7 +601,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           {/* Name */}
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Name </Form.Label>
               <Form.Control
                 ref={(el) => (inputRefs.current[0] = el)}
                 onKeyDown={(e) => handleKeyDown(e, 0)}
@@ -621,7 +621,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
               <Form.Control
                 ref={(el) => (inputRefs.current[1] = el)}
                 onKeyDown={(e) => handleKeyDown(e, 1)}
-                type="text"
+                type="number"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}

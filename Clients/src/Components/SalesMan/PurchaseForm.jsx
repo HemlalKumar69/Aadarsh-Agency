@@ -73,7 +73,7 @@ const PurchaseForm = ({ idToEdit, onSuccess }) => {
       setVendors(vRes.data);
       setVendorsList(vRes.data);
     } catch (err) {
-      toast.error("Failed to add party");
+      toast.error("Failed to ");
     }
   };
 
@@ -170,30 +170,26 @@ const PurchaseForm = ({ idToEdit, onSuccess }) => {
     rowRefs,
   } = useSearchableModal(vendors, "name");
   // OPEN VENDOR MODAL BY DEFAULT
-useEffect(() => {
-  setShowVendorModal(true);
-}, []);
+  useEffect(() => {
+    setShowVendorModal(true);
+  }, []);
 
   const productModal = useSearchableModal(products, "productName");
-  
 
-  // focusFirstEmptyField 
+  // focusFirstEmptyField
 
   const focusFirstEmptyField = () => {
-  if (!purchaseData.partyNo) {
-    partyNoRef.current?.focus();
-  } else if (itemsList.length === 0 || !itemsList[0].productId) {
-    const firstProductInput = document.querySelector(
-      'tbody tr:first-child input[name="productId"], tbody tr:first-child select[name="productId"]'
-    );
-    firstProductInput?.focus();
-  } else {
-    dateRef.current?.focus();
-  }
-};
-
-
-
+    if (!purchaseData.partyNo) {
+      partyNoRef.current?.focus();
+    } else if (itemsList.length === 0 || !itemsList[0].productId) {
+      const firstProductInput = document.querySelector(
+        'tbody tr:first-child input[name="productId"], tbody tr:first-child select[name="productId"]'
+      );
+      firstProductInput?.focus();
+    } else {
+      dateRef.current?.focus();
+    }
+  };
 
   useEffect(() => {
     if (!showVendorModal) return;
@@ -202,39 +198,38 @@ useEffect(() => {
         e.preventDefault();
         setFocusedIndex((prev) => {
           const nextIndex = Math.min(prev + 1, vendorsList.length - 1);
-          rowRefs.current[nextIndex]?.scrollIntoView({ 
+          rowRefs.current[nextIndex]?.scrollIntoView({
             behavior: "smooth",
-            block: "center"
+            block: "center",
           });
           return nextIndex;
         });
-      } else if (e.key === "ArrowUp"){
+      } else if (e.key === "ArrowUp") {
         e.preventDefault();
         setFocusedIndex((prev) => {
           const nextIndex = Math.max(prev - 1, 0);
-          rowRefs.current[nextIndex]?.scrollIntoView({ 
+          rowRefs.current[nextIndex]?.scrollIntoView({
             behavior: "smooth",
             block: "center",
           });
           return nextIndex;
         });
       } else if (e.key === "Enter") {
-  e.preventDefault();
-  const selectedVendor = vendorsList[focusedIndex];
-  if (selectedVendor) {
-    setPurchaseData((prev) => ({
-      ...prev,
-      vendorId: selectedVendor._id,
-      vendorName: selectedVendor.firm,
-    }));
-    setShowVendorModal(false);
+        e.preventDefault();
+        const selectedVendor = vendorsList[focusedIndex];
+        if (selectedVendor) {
+          setPurchaseData((prev) => ({
+            ...prev,
+            vendorId: selectedVendor._id,
+            vendorName: selectedVendor.firm,
+          }));
+          setShowVendorModal(false);
 
-    setTimeout(() => {
-      focusFirstEmptyField();
-    }, 50);
-  }
-}
-      else if (e.key === "Escape"){
+          setTimeout(() => {
+            focusFirstEmptyField();
+          }, 50);
+        }
+      } else if (e.key === "Escape") {
         e.preventDefault();
         setShowVendorModal(false);
       }
@@ -262,16 +257,22 @@ useEffect(() => {
       //   }
       // }
 
-      
-    // Allow only up to 2 decimals
-    if (
-      ["quantity", "availableQty", "purchaseRate", "discountPercent", "schemePercent", "totalAmount"].includes(name)
-    ) {
-      const regex = /^\d*\.?\d{0,2}$/;
-      if (!regex.test(value)) {
-        return updated; // ignore input if it exceeds 2 decimals
+      // Allow only up to 2 decimals
+      if (
+        [
+          "quantity",
+          "availableQty",
+          "purchaseRate",
+          "discountPercent",
+          "schemePercent",
+          "totalAmount",
+        ].includes(name)
+      ) {
+        const regex = /^\d*\.?\d{0,2}$/;
+        if (!regex.test(value)) {
+          return updated; // ignore input if it exceeds 2 decimals
+        }
       }
-    }
 
       if (
         name === "purchaseRate" ||
@@ -423,12 +424,9 @@ useEffect(() => {
       return;
     }
 
- 
-
-
     setTimeout(() => {
       document.querySelector('input[name="partyNo"]')?.focus();
-    },100)
+    }, 100);
 
     setLoading(true);
     try {
@@ -483,6 +481,10 @@ useEffect(() => {
         e.preventDefault();
         if (!loading) handleSubmit({ preventDefault: () => {} });
       }
+      if (e.key === "F10") {
+        e.preventDefault();
+        if (!loading) handleSubmit({ preventDefault: () => {} });
+      }
 
       if (e.key === "Escape") {
         if (showVendorModal) setShowVendorModal(false);
@@ -501,6 +503,15 @@ useEffect(() => {
           });
           setItemsList([{ ...defaultItem }]);
         }
+      }
+
+      // ✅ Right / Left arrow navigation
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        navigate("/purchase-list"); // change route accordingly
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        navigate("/add-purchase"); // change route accordingly
       }
     };
 
@@ -601,7 +612,6 @@ useEffect(() => {
               </Form.Group>
             </Col>
 
-            
             <Col xs={12} sm={6} md={2} className="text-end">
               <Form.Group>
                 <Form.Label>Purchase Date</Form.Label>
@@ -687,7 +697,7 @@ useEffect(() => {
                   Press <kbd>Esc</kbd> to cancel
                 </span>
                 <span>
-                  Press <kbd>F9</kbd> to Add Party
+                  Press <kbd>F9</kbd> to
                 </span>
               </div>
             </Col>
@@ -791,6 +801,19 @@ useEffect(() => {
           >
             {editingId ? "Update Purchase" : "Save Purchase"}
           </Button>
+
+          {/* Centered Submit Button */}
+          <p className=" d-flex justify-content-center">press f10 to submit</p>
+          <div className="d-flex justify-content-center">
+            <Button
+              variant="success"
+              type="button"
+              onClick={handleSubmit}
+              disabled={!purchaseData.vendorId || itemsList.length === 0}
+            >
+              Submit
+            </Button>
+          </div>
         </Form>
       </Card>
 
@@ -827,22 +850,19 @@ useEffect(() => {
 
       {/* Vendor Modal */}
 
+      <VendorModal
+        show={showVendorModal}
+        onHide={() => setShowVendorModal(false)}
 
-    <VendorModal
-  show={showVendorModal}
-  onHide={() => setShowVendorModal(false)}
-
-  // onSelect={(v) => {
-  //   setPurchaseData((prev) => ({
-  //     ...prev,
-  //     vendorId: v._id,
-  //     vendorName: v.firm, // ✅ optional: show selected name
-  //   }));
-  //   setShowVendorModal(false);
-  // }}
-
-  
-/>  
+        // onSelect={(v) => {
+        //   setPurchaseData((prev) => ({
+        //     ...prev,
+        //     vendorId: v._id,
+        //     vendorName: v.firm, // ✅ optional: show selected name
+        //   }));
+        //   setShowVendorModal(false);
+        // }}
+      />
       <VendorModal
         showModal={showVendorModal}
         setShowModal={setShowVendorModal}

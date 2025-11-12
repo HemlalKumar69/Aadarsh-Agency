@@ -29,7 +29,7 @@ const PartyModal = ({ show, onHide, onSubmit }) => {
           <Row className="mb-3">
             <Col md={4}>
               <Form.Group>
-                <Form.Label>Firm Name *</Form.Label>
+                <Form.Label>Firm Name* </Form.Label>
                 <Form.Control
                   name="firm"
                   required

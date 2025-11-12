@@ -10,6 +10,8 @@ import { FilePlus2 } from "lucide-react";
 import { Columns3Cog } from "lucide-react";
 import { BriefcaseBusiness } from "lucide-react";
 
+import { FaEdit } from "react-icons/fa";
+
 // or use your own modal implementation
 
 function PopupModel() {
@@ -274,8 +276,9 @@ function PopupModel() {
                     className={`box ${hoveredIndex === 8 ? "active" : ""}`}
                   >
                     <p className="m-0 p-3 color">
-                      <span>
-                      </span>{" "}
+                      <span style={{ marginRight: "8px" }}>
+                        <FaEdit />
+                      </span>
                       Modify Bill
                     </p>
                   </div>

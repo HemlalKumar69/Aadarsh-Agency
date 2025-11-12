@@ -42,7 +42,7 @@ const Navbarfrist = () => {
           )}
 
           <h5 className="custom-logo mb-0">
-            <span className="custom-logo-part1">Adarsh</span>
+            <span className="custom-logo-part1">Adarsh </span>
             <span className="custom-logo-part2">Agency</span>
           </h5>
         </div>

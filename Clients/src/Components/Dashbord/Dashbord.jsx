@@ -3,8 +3,14 @@ import Navbarfrist from "./Navbarfrist";
 import DashboardNav from "./DashboardNav";
 import DashboardCards from "./DashboardCards";
 
-const Dashbord = () => {
-  return <div>{/* <DashboardCards/> */}</div>;
+const Dashboard = () => {
+  return (
+    <div>
+      <Navbarfrist />
+      <DashboardNav />
+      <DashboardCards />
+    </div>
+  );
 };
 
-export default Dashbord;
+export default Dashboard;
