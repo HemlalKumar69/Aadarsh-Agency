@@ -22,6 +22,16 @@ router.get("/", async (req, res) => {
   res.json(ledger);
 });
 
+router.get("/fetchAllCustomerLedger", async (req, res) => {
+  try {
+    const ledger = await customerLedger
+      .find()
+      .populate("customerId")
+      .sort({ date: 1 });
+    res.json(ledger);
+  } catch (error) {}
+});
+
 router.get("/next-voucher-number", async (req, res) => {
   const last = await customerLedger.findOne().sort({ createdAt: -1 });
   let next = 1;

@@ -220,7 +220,7 @@ const Navbarfrist = () => {
                   style={navLinkStyle("/add-invoice")}
                   onClick={closeSidebar}
                 >
-                  Add New Billing 
+                  Add New Billing
                 </Link>
                 <Link
                   to="/display-invoice"
@@ -327,7 +327,7 @@ const Navbarfrist = () => {
                   style={navLinkStyle("/ledger")}
                   onClick={closeSidebar}
                 >
-                  Customer Ledger  
+                  Customer Ledger
                 </Link>
                 <Link
                   to="/vendor-ledger"
@@ -447,7 +447,9 @@ const Navbarfrist = () => {
               className="btn text-white w-100 text-start d-flex align-items-center gap-2"
               ref={(el) => (navLinksRef.current[23] = el)}
             >
-              <FiLayers /> Report <FiChevronDown size={12} />
+              <Link to="reports">
+                <FiLayers /> Report <FiChevronDown size={12} />
+              </Link>
             </button>
           </div>
         </nav>

@@ -8,6 +8,7 @@ router.post("/", vendorCtrl.createVendor);
 router.get("/", vendorCtrl.getallVendors);
 
 // vendor bills
+router.get("/fetchAllBills", vendorCtrl.getAllBillsByVendor);
 router.get("/vendor/:vendorId", vendorCtrl.getBillsByVendorId);
 
 // Get a vendor by ID

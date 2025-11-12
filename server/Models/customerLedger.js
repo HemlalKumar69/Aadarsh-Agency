@@ -24,6 +24,7 @@ const customerLedgerSchema = new mongoose.Schema({
 
   refId: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "Invoice",
     required: true,
   },
 

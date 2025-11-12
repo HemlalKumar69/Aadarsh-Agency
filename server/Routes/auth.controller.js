@@ -1,7 +1,6 @@
 const express = require("express");
 const SalesManModel = require("../Models/SalesManModel");
 const jwt = require("jsonwebtoken");
-const { none } = require("../config/multer");
 
 const router = express.Router();
 
@@ -41,8 +40,6 @@ router.post("/salesman", async (req, res) => {
     const isProd = process.env.NODE_ENV === "production";
 
     console.log(token);
-    
-    
 
     res.cookie("token", token, {
       httpOnly: true,

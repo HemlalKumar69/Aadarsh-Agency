@@ -7,6 +7,7 @@ const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const reportsRoutes = require("./Routes/reports.routes");
 
 // ---------Routes----------
 const protectedRoutes = require("./middleware/auth.middleware");
@@ -24,19 +25,16 @@ const CheckAuth = require("./Routes/CheckAuth");
 const fetchShopName = require("./Routes/getShopName");
 const addProductData = require("./Routes/addSalesmanProductData");
 const Logout = require("./Routes/logoutSalesman.js");
-const customerBillInvoice = require("./Controller/CustomerBillCTRL.js");
+const authAdmin = require("./Routes/auth.routes.js");
 
 //  Morgan middleware (logs all requests in 'dev' format)
 app.use(morgan("dev"));
 
+console.log("cors", process.env.CORS_LOCAL, process.env.CORS_LOCAL_2);
+
 app.use(
   cors({
-    origin: [
-      process.env.CORS_ORIGIN,
-      process.env.CORS_ORIGIN_2,
-      process.env.CORS_LOCAL,
-      process.env.CORS_LOCAL_2,
-    ],
+    origin: [process.env.CORS_LOCAL, process.env.CORS_LOCAL_2],
     credentials: true,
   })
 );
@@ -53,7 +51,6 @@ mongoose
   .then(() => console.log(" DB connected"))
   .catch((err) => console.error(" DB Connection Error:", err));
 
-
 //  Routes
 app.use("/api/vendor/ledger", require("./Routes/ledger.routes"));
 app.use("/api/ledger", require("./Routes/CustomerledgerRoute"));
@@ -66,14 +63,19 @@ app.use("/api/Subcategory", SubCategoryRoute);
 app.use("/api/salesman", SalesManRoute);
 app.use("/api/pro-billing", BillingRoute);
 
+app.use("/api/auth", authAdmin);/////
+
 app.use("/api/vendor", VendorRoute);
 app.use("/api/purchase", PurchaseRoute);
 app.use("/api/login", auth);
 app.use("/api/checksalesman", CheckAuth);
 app.use("/api/fetchshopname", fetchShopName);
-app.use("/api/addsalesmanproductdata", addProductData);
+app.use("/api/addsalesmanproductdata", protectedRoutes, addProductData);
 app.use("/api/logout", Logout);
 
+app.use("/api/reportss", reportsRoutes);///////
+/// reports routes
+app.use("/api/reports", addProductData);
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
@@ -95,7 +97,6 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 
 //  Server Listen
 const port = process.env.PORT || 5000;

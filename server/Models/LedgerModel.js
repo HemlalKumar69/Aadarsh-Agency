@@ -26,6 +26,7 @@ const vendorLedgerSchema = new mongoose.Schema({
 
   refId: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "Purchase",
     required: true,
   },
 

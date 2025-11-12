@@ -88,6 +88,22 @@ const getBillsByVendorId = async (req, res) => {
   }
 };
 
+const getAllBillsByVendor = async (req, res) => {
+  try {
+    // Fetch all purchases (bills) for that vendor
+    const purchases = await Purchase.find({})
+      .populate("vendorId ledgerIds items.productId")
+      .sort({ date: -1 });
+
+    return res.status(200).json({
+      bills: purchases,
+    });
+  } catch (error) {
+    console.error("Error fetching vendor bills:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   getBillsByVendorId,
   createVendor,
@@ -95,4 +111,5 @@ module.exports = {
   getVendorById,
   updateVendor,
   deleteVendor,
+  getAllBillsByVendor,
 };

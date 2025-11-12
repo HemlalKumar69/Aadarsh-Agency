@@ -17,7 +17,3 @@ const SalesmanSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Salesman", SalesmanSchema);
-
-
-
- 

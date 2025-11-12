@@ -6,25 +6,24 @@ const customerSchema = new mongoose.Schema(
       type: String,
     },
     name: {
-      type: String
+      type: String,
     },
     address1: {
       type: String,
     },
     mobile: {
       type: Number,
-     
     },
 
     alternateMobile: {
-      type: Number
+      type: Number,
     },
     email: {
       type: String,
       lowercase: true,
     },
     whatsapp: {
-      type: Number
+      type: Number,
     },
 
     designation: {
@@ -65,7 +64,7 @@ const customerSchema = new mongoose.Schema(
       type: String,
     },
     creditDays: {
-      type: String
+      type: String,
     },
   },
   { timestamps: true }
