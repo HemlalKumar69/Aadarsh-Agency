@@ -209,7 +209,7 @@ const Navbarfrist = () => {
               className="btn text-white w-100 text-start d-flex align-items-center gap-2"
               ref={(el) => (navLinksRef.current[7] = el)}
             >
-              <FiLayers /> Sales <FiChevronDown size={12} />
+              <FiLayers /> Billing <FiChevronDown size={12} />
             </button>
             {openDropdown === "sales" && (
               <div className="ps-3 colored1">

@@ -23,7 +23,10 @@ function App() {
             path="/"
             element={
               <ProtectedRoute>
-                <Dashboard userDetail={userDetail} setUserDetail={setUserDetail} />
+                <Dashboard
+                  userDetail={userDetail}
+                  setUserDetail={setUserDetail}
+                />
               </ProtectedRoute>
             }
           />

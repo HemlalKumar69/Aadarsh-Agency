@@ -370,7 +370,7 @@ const Dashboard = () => {
     >
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center bg-white px-4 py-3 shadow">
-        <h5 className="mb-0 fw-bold">Welcome Aadarsh Agency</h5>
+        <h5 className="mb-0 fw-bold">Welcome Adarsh Agency</h5>
 
         {/* 🚪 Logout Button */}
         <Button

@@ -664,11 +664,17 @@ const CustomerBilling = ({
 
                 if (e.key === "ArrowDown") {
                   e.preventDefault();
-                  newIndex = salesmanFocusedIndex < filteredSalesmen.length - 1 ? salesmanFocusedIndex + 1 : 0;
+                  newIndex =
+                    salesmanFocusedIndex < filteredSalesmen.length - 1
+                      ? salesmanFocusedIndex + 1
+                      : 0;
                   setSalesmanFocusedIndex(newIndex);
                 } else if (e.key === "ArrowUp") {
                   e.preventDefault();
-                  newIndex = salesmanFocusedIndex > 0 ? salesmanFocusedIndex - 1 : filteredSalesmen.length - 1;
+                  newIndex =
+                    salesmanFocusedIndex > 0
+                      ? salesmanFocusedIndex - 1
+                      : filteredSalesmen.length - 1;
                   setSalesmanFocusedIndex(newIndex);
                 } else if (e.key === "Enter") {
                   e.preventDefault();
@@ -706,10 +712,12 @@ const CustomerBilling = ({
                   {filteredSalesmen.map((s, index) => (
                     <tr
                       key={s._id}
-                      id={`salesman-row-${index}`}   // ← add this
+                      id={`salesman-row-${index}`} // ← add this
                       onClick={() => handleSalesmanSelect(s)}
                       onMouseEnter={() => setSalesmanFocusedIndex(index)}
-                      className={salesmanFocusedIndex === index ? "table-active" : ""}
+                      className={
+                        salesmanFocusedIndex === index ? "table-active" : ""
+                      }
                       style={{ cursor: "pointer" }}
                     >
                       <td>{s.name}</td>
@@ -726,298 +734,294 @@ const CustomerBilling = ({
         </div>
       )}
     </div>
-    );
+  );
 };
 export default CustomerBilling;
 
+// <div className="container mt-4">
+//   <h4></h4>
+//   <form>
+//     <div className="row">
+//       {/* Salesman Selector */}
+//       <div className="form-group col-md-6">
+//         <label>Salesman</label>
+//         <input
+//           type="text"
+//           className="form-control"
+//           placeholder="Select Salesman"
+//           value={selectedSalesman?.name || ""}
+//           readOnly
+//           onFocus={() => setShowSalesmanModal(true)}
+//         />
+//       </div>
 
+//       {/* Beat Selector */}
+//       <div className="form-group col-md-6">
+//         <label>Beat</label>
+//         <Select
+//           ref={beatSelectRef}
+//           options={beatsOptions}
+//           // {onEdit?value.onEdit?.customer?.}
+//           value={selectedBeat}
+//           onChange={(opt) => {
+//             setSelectedBeat(opt), console.log(opt);
+//           }}
+//           placeholder="Select Beat"
+//           isClearable
+//           styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+//           menuPortalTarget={document.body}
+//         />
+//       </div>
+//     </div>
 
+//     <div className="row mt-3">
+//       <div className="form-group col-md-4">
+//         <label>Bill Date</label>
+//         <input
+//           type="date"
+//           name="Billdate"
+//           className="form-control"
+//           value={formData.Billdate}
+//           onChange={handleInputChange}
+//           ref={billDateRef}
+//           onKeyDown={handleKeyDown}
+//         />
+//       </div>
 
+//       <div className="form-group col-md-4">
+//         <label>Payment Mode</label>
+//         <select
+//           name="paymentMode"
+//           className="form-control"
+//           value={formData.paymentMode}
+//           onChange={handleInputChange}
+//           onKeyDown={handleKeyDown}
+//         >
+//           <option value="">Select Payment Mode</option>
+//           <option value="Cash">Cash</option>
+//           <option value="Card">Card</option>
+//         </select>
+//       </div>
 
-    // <div className="container mt-4">
-    //   <h4>Customer Billing</h4>
-    //   <form>
-    //     <div className="row">
-    //       {/* Salesman Selector */}
-    //       <div className="form-group col-md-6">
-    //         <label>Salesman</label>
-    //         <input
-    //           type="text"
-    //           className="form-control"
-    //           placeholder="Select Salesman"
-    //           value={selectedSalesman?.name || ""}
-    //           readOnly
-    //           onFocus={() => setShowSalesmanModal(true)}
-    //         />
-    //       </div>
+//       <div className="form-group col-md-4">
+//         <label>Billing Type</label>
+//         <select
+//           name="billingType"
+//           className="form-control"
+//           value={formData.billingType}
+//           onChange={handleInputChange}
+//           onKeyDown={handleKeyDown}
+//           ref={billingTypeRef} // Ref for billing type select
+//         >
+//           <option value="Credit">Credit</option>
+//           <option value="Cash">Cash</option>
+//         </select>
+//       </div>
+//     </div>
 
-    //       {/* Beat Selector */}
-    //       <div className="form-group col-md-6">
-    //         <label>Beat</label>
-    //         <Select
-    //           ref={beatSelectRef}
-    //           options={beatsOptions}
-    //           // {onEdit?value.onEdit?.customer?.}
-    //           value={selectedBeat}
-    //           onChange={(opt) => {
-    //             setSelectedBeat(opt), console.log(opt);
-    //           }}
-    //           placeholder="Select Beat"
-    //           isClearable
-    //           styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-    //           menuPortalTarget={document.body}
-    //         />
-    //       </div>
-    //     </div>
+//     {selectedCustomer && (
+//       <div className="row mt-3">
+//         <div className="col-12">
+//           <div className="alert alert-success d-flex justify-content-between">
+//             <div>
+//               <strong>Selected Customer:</strong> {selectedCustomer.ledger}
+//               {selectedCustomer.area && ` - ${selectedCustomer.area}`}
+//               {selectedCustomer.mobile && ` - ${selectedCustomer.mobile}`}
+//             </div>
+//             <div>
+//               <button
+//                 className="bg-black text-white px-3 py-1 rounded"
+//                 onClick={removeCustomer}
+//               >
+//                 X
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     )}
+//   </form>
 
-    //     <div className="row mt-3">
-    //       <div className="form-group col-md-4">
-    //         <label>Bill Date</label>
-    //         <input
-    //           type="date"
-    //           name="Billdate"
-    //           className="form-control"
-    //           value={formData.Billdate}
-    //           onChange={handleInputChange}
-    //           ref={billDateRef}
-    //           onKeyDown={handleKeyDown}
-    //         />
-    //       </div>
+//   {/* Customer Table */}
+//   {(selectedBeat || selectedSalesman) && visibleCustomers.length > 0 && (
+//     <div className="mt-4">
+//       <Card>
+//         <Card.Body style={{ position: "relative" }}>
+//           <button
+//             type="button"
+//             aria-label="Close"
+//             onClick={() => setFilteredCustomers([])}
+//             style={{
+//               position: "absolute",
+//               top: 8,
+//               right: 12,
+//               border: "none",
+//               background: "transparent",
+//               fontSize: 22,
+//               lineHeight: 1,
+//               cursor: "pointer",
+//             }}
+//           >
+//             ×
+//           </button>
 
-    //       <div className="form-group col-md-4">
-    //         <label>Payment Mode</label>
-    //         <select
-    //           name="paymentMode"
-    //           className="form-control"
-    //           value={formData.paymentMode}
-    //           onChange={handleInputChange}
-    //           onKeyDown={handleKeyDown}
-    //         >
-    //           <option value="">Select Payment Mode</option>
-    //           <option value="Cash">Cash</option>
-    //           <option value="Card">Card</option>
-    //         </select>
-    //       </div>
+//           {/* 🔍 Customer Search */}
+//           <input
+//             type="text"
+//             className="form-control mb-2"
+//             placeholder="Search Customer..."
+//             value={customerFilterText}
+//             onChange={(e) => {
+//               setCustomerFilterText(e.target.value);
+//               setCustomerFocusedIndex(0);
+//             }}
+//           />
 
-    //       <div className="form-group col-md-4">
-    //         <label>Billing Type</label>
-    //         <select
-    //           name="billingType"
-    //           className="form-control"
-    //           value={formData.billingType}
-    //           onChange={handleInputChange}
-    //           onKeyDown={handleKeyDown}
-    //           ref={billingTypeRef} // Ref for billing type select
-    //         >
-    //           <option value="Credit">Credit</option>
-    //           <option value="Cash">Cash</option>
-    //         </select>
-    //       </div>
-    //     </div>
+//           <div
+//             ref={customerTableRef}
+//             tabIndex={0}
+//             onKeyDown={handleCustomerKeyDown}
+//             style={{
+//               maxHeight: "300px",
+//               overflowY: "auto",
+//               outline: "none",
+//             }}
+//           >
+//             <table className="table table-hover">
+//               <thead className="table-light">
+//                 <tr>
+//                   <th>Firm Name</th>
+//                   <th>Area</th>
+//                   <th>Mobile</th>
+//                   <th>Address</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {visibleCustomers.map((opt, index) => (
+//                   <tr
+//                     key={opt.value}
+//                     onClick={() => handleCustomerSelect(opt.customerObject)}
+//                     onMouseEnter={() => setCustomerFocusedIndex(index)}
+//                     className={
+//                       customerFocusedIndex === index ? "table-active" : ""
+//                     }
+//                     style={{ cursor: "pointer" }}
+//                   >
+//                     <td>{opt.customerObject.ledger}</td>
+//                     <td>{opt.customerObject.area || "N/A"}</td>
+//                     <td>{opt.customerObject.mobile || "N/A"}</td>
+//                     <td>{opt.customerObject.address1 || "N/A"}</td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+//         </Card.Body>
+//       </Card>
+//     </div>
+//   )}
 
-    //     {selectedCustomer && (
-    //       <div className="row mt-3">
-    //         <div className="col-12">
-    //           <div className="alert alert-success d-flex justify-content-between">
-    //             <div>
-    //               <strong>Selected Customer:</strong> {selectedCustomer.ledger}
-    //               {selectedCustomer.area && ` - ${selectedCustomer.area}`}
-    //               {selectedCustomer.mobile && ` - ${selectedCustomer.mobile}`}
-    //             </div>
-    //             <div>
-    //               <button
-    //                 className="bg-black text-white px-3 py-1 rounded"
-    //                 onClick={removeCustomer}
-    //               >
-    //                 X
-    //               </button>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     )}
-    //   </form>
+//   {/* Salesman Modal */}
+//   {showSalesmanModal && (
+//     <div
+//       className="modal-overlay"
+//       onClick={() => setShowSalesmanModal(false)}
+//       style={{
+//         position: "fixed",
+//         inset: 0,
+//         background: "rgba(0,0,0,0.35)",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         zIndex: 1050,
+//       }}
+//     >
+//       <div
+//         className="modal-content"
+//         ref={salesmanModalRef}
+//         onClick={(e) => e.stopPropagation()}
+//         style={{
+//           background: "#fff",
+//           borderRadius: 8,
+//           padding: 16,
+//           width: "min(900px, 95vw)",
+//           maxHeight: "80vh",
+//           overflow: "hidden",
+//           position: "relative",
+//           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+//         }}
+//       >
+//         <button
+//           type="button"
+//           aria-label="Close"
+//           onClick={() => setShowSalesmanModal(false)}
+//           style={{
+//             position: "absolute",
+//             top: 8,
+//             right: 12,
+//             border: "none",
+//             background: "transparent",
+//             fontSize: 22,
+//             lineHeight: 1,
+//             cursor: "pointer",
+//           }}
+//         >
+//           ×
+//         </button>
 
-    //   {/* Customer Table */}
-    //   {(selectedBeat || selectedSalesman) && visibleCustomers.length > 0 && (
-    //     <div className="mt-4">
-    //       <Card>
-    //         <Card.Body style={{ position: "relative" }}>
-    //           <button
-    //             type="button"
-    //             aria-label="Close"
-    //             onClick={() => setFilteredCustomers([])}
-    //             style={{
-    //               position: "absolute",
-    //               top: 8,
-    //               right: 12,
-    //               border: "none",
-    //               background: "transparent",
-    //               fontSize: 22,
-    //               lineHeight: 1,
-    //               cursor: "pointer",
-    //             }}
-    //           >
-    //             ×
-    //           </button>
+//         <input
+//           type="text"
+//           className="form-control mb-2"
+//           placeholder="Search Salesman..."
+//           value={salesmanFilterText}
+//           onChange={(e) => {
+//             setSalesmanFilterText(e.target.value);
+//             setSalesmanFocusedIndex(0);
+//           }}
+//           ref={salesmanInputRef}
+//           onKeyDown={handleSalesmanKeyDown}
+//         />
 
-    //           {/* 🔍 Customer Search */}
-    //           <input
-    //             type="text"
-    //             className="form-control mb-2"
-    //             placeholder="Search Customer..."
-    //             value={customerFilterText}
-    //             onChange={(e) => {
-    //               setCustomerFilterText(e.target.value);
-    //               setCustomerFocusedIndex(0);
-    //             }}
-    //           />
-
-    //           <div
-    //             ref={customerTableRef}
-    //             tabIndex={0}
-    //             onKeyDown={handleCustomerKeyDown}
-    //             style={{
-    //               maxHeight: "300px",
-    //               overflowY: "auto",
-    //               outline: "none",
-    //             }}
-    //           >
-    //             <table className="table table-hover">
-    //               <thead className="table-light">
-    //                 <tr>
-    //                   <th>Firm Name</th>
-    //                   <th>Area</th>
-    //                   <th>Mobile</th>
-    //                   <th>Address</th>
-    //                 </tr>
-    //               </thead>
-    //               <tbody>
-    //                 {visibleCustomers.map((opt, index) => (
-    //                   <tr
-    //                     key={opt.value}
-    //                     onClick={() => handleCustomerSelect(opt.customerObject)}
-    //                     onMouseEnter={() => setCustomerFocusedIndex(index)}
-    //                     className={
-    //                       customerFocusedIndex === index ? "table-active" : ""
-    //                     }
-    //                     style={{ cursor: "pointer" }}
-    //                   >
-    //                     <td>{opt.customerObject.ledger}</td>
-    //                     <td>{opt.customerObject.area || "N/A"}</td>
-    //                     <td>{opt.customerObject.mobile || "N/A"}</td>
-    //                     <td>{opt.customerObject.address1 || "N/A"}</td>
-    //                   </tr>
-    //                 ))}
-    //               </tbody>
-    //             </table>
-    //           </div>
-    //         </Card.Body>
-    //       </Card>
-    //     </div>
-    //   )}
-
-    //   {/* Salesman Modal */}
-    //   {showSalesmanModal && (
-    //     <div
-    //       className="modal-overlay"
-    //       onClick={() => setShowSalesmanModal(false)}
-    //       style={{
-    //         position: "fixed",
-    //         inset: 0,
-    //         background: "rgba(0,0,0,0.35)",
-    //         display: "flex",
-    //         alignItems: "center",
-    //         justifyContent: "center",
-    //         zIndex: 1050,
-    //       }}
-    //     >
-    //       <div
-    //         className="modal-content"
-    //         ref={salesmanModalRef}
-    //         onClick={(e) => e.stopPropagation()}
-    //         style={{
-    //           background: "#fff",
-    //           borderRadius: 8,
-    //           padding: 16,
-    //           width: "min(900px, 95vw)",
-    //           maxHeight: "80vh",
-    //           overflow: "hidden",
-    //           position: "relative",
-    //           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-    //         }}
-    //       >
-    //         <button
-    //           type="button"
-    //           aria-label="Close"
-    //           onClick={() => setShowSalesmanModal(false)}
-    //           style={{
-    //             position: "absolute",
-    //             top: 8,
-    //             right: 12,
-    //             border: "none",
-    //             background: "transparent",
-    //             fontSize: 22,
-    //             lineHeight: 1,
-    //             cursor: "pointer",
-    //           }}
-    //         >
-    //           ×
-    //         </button>
-
-    //         <input
-    //           type="text"
-    //           className="form-control mb-2"
-    //           placeholder="Search Salesman..."
-    //           value={salesmanFilterText}
-    //           onChange={(e) => {
-    //             setSalesmanFilterText(e.target.value);
-    //             setSalesmanFocusedIndex(0);
-    //           }}
-    //           ref={salesmanInputRef}
-    //           onKeyDown={handleSalesmanKeyDown}
-    //         />
-
-    //         <div
-    //           tabIndex={0}
-    //           onKeyDown={handleSalesmanKeyDown}
-    //           style={{ maxHeight: 400, overflowY: "auto", outline: "none" }}
-    //         >
-    //           <table className="table table-hover">
-    //             <thead className="table-light">
-    //               <tr>
-    //                 <th>Name</th>
-    //                 <th>Mobile</th>
-    //                 <th>City</th>
-    //                 <th>Username</th>
-    //                 <th>Beat Area</th>
-    //               </tr>
-    //             </thead>
-    //             <tbody>
-    //               {filteredSalesmen.map((s, index) => (
-    //                 <tr
-    //                   key={s._id}
-    //                   onClick={() => handleSalesmanSelect(s)}
-    //                   onMouseEnter={() => setSalesmanFocusedIndex(index)}
-    //                   className={
-    //                     salesmanFocusedIndex === index ? "table-active" : ""
-    //                   }
-    //                   style={{ cursor: "pointer" }}
-    //                 >
-    //                   <td>{s.name}</td>
-    //                   <td>{s.mobile}</td>
-    //                   <td>{s.city}</td>
-    //                   <td>{s.username}</td>
-    //                   <td>{s.beat?.map((b) => b.area).join(", ") || "N/A"}</td>
-    //                 </tr>
-    //               ))}
-    //             </tbody>
-    //           </table>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    // </div>
+//         <div
+//           tabIndex={0}
+//           onKeyDown={handleSalesmanKeyDown}
+//           style={{ maxHeight: 400, overflowY: "auto", outline: "none" }}
+//         >
+//           <table className="table table-hover">
+//             <thead className="table-light">
+//               <tr>
+//                 <th>Name</th>
+//                 <th>Mobile</th>
+//                 <th>City</th>
+//                 <th>Username</th>
+//                 <th>Beat Area</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {filteredSalesmen.map((s, index) => (
+//                 <tr
+//                   key={s._id}
+//                   onClick={() => handleSalesmanSelect(s)}
+//                   onMouseEnter={() => setSalesmanFocusedIndex(index)}
+//                   className={
+//                     salesmanFocusedIndex === index ? "table-active" : ""
+//                   }
+//                   style={{ cursor: "pointer" }}
+//                 >
+//                   <td>{s.name}</td>
+//                   <td>{s.mobile}</td>
+//                   <td>{s.city}</td>
+//                   <td>{s.username}</td>
+//                   <td>{s.beat?.map((b) => b.area).join(", ") || "N/A"}</td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//       </div>
+//     </div>
+//   )}
+// </div>
 
 // import React, { useEffect, useState, useRef } from "react";
 // import { useParams } from "react-router-dom";

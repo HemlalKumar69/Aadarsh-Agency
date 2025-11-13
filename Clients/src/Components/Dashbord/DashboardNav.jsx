@@ -288,7 +288,7 @@ const Navbarfrist = () => {
               onClick={() => toggleDropdown("modifybill")}
               className="btn  text-white w-100 text-start d-flex align-items-center gap-2"
             >
-              <FiLayers /> Modify Bill <FiChevronDown size={12} />
+              <FiLayers /> Modify Bill<FiChevronDown size={12} />
             </button>
             {openDropdown === "modifybill" && (
               <div className="ps-3">

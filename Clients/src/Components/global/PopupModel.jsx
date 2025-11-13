@@ -2,19 +2,24 @@ import React, { useEffect, useState, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { HandCoins } from "lucide-react";
-import { BadgePoundSterling } from "lucide-react";
+import { IndianRupee} from "lucide-react";
 import { ShoppingCart } from "lucide-react";
-import { Receipt } from "lucide-react";
+// import { IndianRupee } from "lucide-react";
 import { ScanSearch } from "lucide-react";
 import { FilePlus2 } from "lucide-react";
 import { Columns3Cog } from "lucide-react";
 import { BriefcaseBusiness } from "lucide-react";
+import { useModal } from "./ModalContext";
+
+
 
 import { FaEdit } from "react-icons/fa";
 
 // or use your own modal implementation
 
 function PopupModel() {
+  const { clodeModifyBill, openModifyBill } = useModal();
+
   const [showModal, setShowModal] = useState(false);
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -89,7 +94,7 @@ function PopupModel() {
       {/* Global modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Global F4 Modal </Modal.Title>
+          <Modal.Title>Quick Link </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {/* <p>This modal opens no matter where you are in the app 🎉</p> */}
@@ -150,9 +155,9 @@ function PopupModel() {
                     <p className="m-0 p-3 color">
                       {" "}
                       <span>
-                        <BadgePoundSterling />
+                        <IndianRupee />
                       </span>{" "}
-                      Payment
+                      Billing
                     </p>
                   </div>
                 </Link>
@@ -172,7 +177,7 @@ function PopupModel() {
                     <p className="m-0 px-3 py-1 color">
                       {" "}
                       <span>
-                        <Receipt />
+                        <IndianRupee />
                       </span>{" "}
                       Purchase bill
                     </p>
@@ -233,12 +238,12 @@ function PopupModel() {
                     onKeyDown={(e) => handleKeyDown(e, 6)}
                     className={`box ${hoveredIndex === 6 ? "active" : ""}`}
                   >
-                    <p className="m-0 px-3 py-1 color">
+                    <p className="m-0 px-4 py-3 color">
                       {" "}
                       <span>
                         <FilePlus2 />
                       </span>{" "}
-                      Add New Bill
+                      Add Bill
                     </p>
                   </div>
                 </Link>
@@ -265,24 +270,26 @@ function PopupModel() {
               </div>
 
               <div className="col-12 col-md-4">
-                <Link to={"/modifyBill"} className="text-decoration-none">
-                  <div
-                    tabIndex={8}
-                    onMouseEnter={() => handleMouseEnter(8)}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => setShowModal(false)}
-                    ref={(el) => (inputRefs.current[8] = el)}
-                    onKeyDown={(e) => handleKeyDown(e, 8)}
-                    className={`box ${hoveredIndex === 8 ? "active" : ""}`}
-                  >
-                    <p className="m-0 p-3 color">
-                      <span style={{ marginRight: "8px" }}>
-                        <FaEdit />
-                      </span>
-                      Modify Bill
-                    </p>
-                  </div>
-                </Link>
+                {/* <Link to={"/modifyBill"} className="text-decoration-none"> */}
+                <div
+                  tabIndex={8}
+                  onMouseEnter={() => handleMouseEnter(8)}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={() => {
+                    setShowModal(false), openModifyBill();
+                  }}
+                  ref={(el) => (inputRefs.current[8] = el)}
+                  onKeyDown={(e) => handleKeyDown(e, 8)}
+                  className={`box ${hoveredIndex === 8 ? "active" : ""}`}
+                >
+                  <p className="m-0 p-3 color">
+                    <span style={{ marginRight: "8px" }}>
+                      <FaEdit />
+                    </span>
+                    Modify Bill
+                  </p>
+                </div>
+                {/* </Link> */}
               </div>
             </div>
           </div>
