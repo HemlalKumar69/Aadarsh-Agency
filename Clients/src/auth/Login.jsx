@@ -60,10 +60,10 @@ const Auth = () => {
 
         {isRegister && (
           <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
             onChange={handleChange}
             style={styles.input}
             required
@@ -71,10 +71,10 @@ const Auth = () => {
         )}
 
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          value={formData.name}
           onChange={handleChange}
           style={styles.input}
           required
