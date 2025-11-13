@@ -27,6 +27,8 @@ const addProductData = require("./Routes/addSalesmanProductData");
 const Logout = require("./Routes/logoutSalesman.js");
 const authAdmin = require("./Routes/auth.routes.js");
 
+const total = require("./Routes/total.routes.js");
+
 //  Morgan middleware (logs all requests in 'dev' format)
 app.use(morgan("dev"));
 
@@ -63,7 +65,7 @@ app.use("/api/Subcategory", SubCategoryRoute);
 app.use("/api/salesman", SalesManRoute);
 app.use("/api/pro-billing", BillingRoute);
 
-app.use("/api/auth", authAdmin);/////
+app.use("/api/auth", authAdmin); /////
 
 app.use("/api/vendor", VendorRoute);
 app.use("/api/purchase", PurchaseRoute);
@@ -73,7 +75,10 @@ app.use("/api/fetchshopname", fetchShopName);
 app.use("/api/addsalesmanproductdata", protectedRoutes, addProductData);
 app.use("/api/logout", Logout);
 
-app.use("/api/reportss", reportsRoutes);///////
+// dashboard
+app.use("/api/total", total);
+
+app.use("/api/reportss", reportsRoutes); ///////
 /// reports routes
 app.use("/api/reports", addProductData);
 

@@ -98,9 +98,8 @@ const Navbarfrist = () => {
       {/* Sidebar */}
       <div
         id="new-sidebar"
-        className={`sidebar bg-dark text-white shadow position-fixed top-0 start-0 ${
-          isOpen ? "open" : "collapsed"
-        }`}
+        className={`sidebar bg-dark text-white shadow position-fixed top-0 start-0 ${isOpen ? "open" : "collapsed"
+          }`}
         style={{
           width: isOpen ? 250 : 0,
           transition: "width 0.3s",
@@ -437,7 +436,7 @@ const Navbarfrist = () => {
             <button
               onClick={() => toggleDropdown("report")}
               onKeyDown={(e) => {
-                if (e.key === "Arrowdown") {
+                if (e.key === "ArrowDown") {
                   setOpenDropdown("report");
                 }
                 if (e.key === "ArrowUp") {
@@ -446,9 +445,13 @@ const Navbarfrist = () => {
               }}
               className="btn text-white w-100 text-start d-flex align-items-center gap-2"
               ref={(el) => (navLinksRef.current[23] = el)}
+              style={navLinkStyle("/reports")}
             >
-              <Link to="reports">
-                <FiLayers /> Report <FiChevronDown size={12} />
+              <Link
+                to="reports"
+                className="text-white text-decoration-none d-flex align-items-center gap-2"
+              >
+                <FiLayers /> Report <FiChevronDown size={13} />
               </Link>
             </button>
           </div>
