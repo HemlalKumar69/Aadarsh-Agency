@@ -795,13 +795,13 @@ const ProductBillingReport = ({ onBillingDataChange, onEdit }, ref) => {
           <strong>Shortcuts:</strong>
           <div className="d-flex align-items-center gap-3">
             <span>
-              Press  <span className="bg-dark text-white p-1">F2</span> <strong> For New Line</strong>
+              Press  <span className="bg-dark text-white p-1 rounded-1">F2</span> <strong> For New Line</strong>
             </span>
             <span>
-              Press <strong> Enter to save</strong>
+              Press <strong> <span className="bg-dark text-white p-1 rounded-1">Enter</span> to save</strong>
             </span>
             <span>
-              Press  <span className="bg-dark text-white p-1">F2</span> <strong> For New Delete</strong>
+              Press  <span className="bg-dark text-white p-1 rounded-1">F2</span> <strong> For Delete</strong>
             </span>
           </div>
         </div>

@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import { Modal, Form, Table } from "react-bootstrap";
 
+import toast from "react-hot-toast";
+
 import axiosInstance from "../../Config/axios";
 import Header from "./Header1";
 
@@ -199,7 +201,7 @@ const BillAdjustmentModal = forwardRef(
             );
             console.log(res);
 
-            alert("✅ Amount adjusted successfully");
+            toast.success("✅ Amount adjusted successfully");
 
             const updated = [...rows];
             updated[index].particulars = "New Ref Adjustment";
@@ -208,7 +210,7 @@ const BillAdjustmentModal = forwardRef(
             setRows(updated);
           } catch (err) {
             console.error(err);
-            alert("❌ Failed to adjust amount");
+            toast.error("❌ Failed to adjust amount");
           }
         }
       }

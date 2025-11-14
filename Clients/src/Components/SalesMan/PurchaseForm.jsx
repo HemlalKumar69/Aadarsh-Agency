@@ -697,7 +697,7 @@ const PurchaseForm = ({ idToEdit, onSuccess }) => {
                   Press <kbd>Esc</kbd> to cancel
                 </span>
                 <span>
-                  Press <kbd>F9</kbd> to
+                    Press <kbd>F9</kbd> to add party
                 </span>
               </div>
             </Col>

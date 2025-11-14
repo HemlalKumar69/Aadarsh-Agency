@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import axiosInstance from "../../Config/axios";
 import Header from "./Header1";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import {
   updateCustomerBalanced,
@@ -139,18 +140,18 @@ const PendingBillsModal = ({
         })
       ).unwrap();
 
-      if (res.success) {
-        alert("✅ Payment successful!");
+      if (res && res.success) {
+        toast.success(" Payment successful!");
 
         setDebitAmount((prev) => Math.max(prev - amount, 0));
         dispatch(fetchCustomerById(selectedCustomer?._id));
         setInputValue(""); // reset input field
       } else {
-        alert(res.message || "Payment failed");
+        toast.error(res?.message || "Payment failed");
       }
     } catch (error) {
       console.error("Error while updating balance:", error);
-      alert(error.message || "Something went wrong while debiting balance");
+      toast.error(error?.message || "Something went wrong while debiting balance");
     }
   };
 

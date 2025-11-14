@@ -86,7 +86,7 @@ const PendingBillsModal = ({
         closeButton
         className="bg-bg-success"
       >
-        <Modal.Title className="text-white">PENDING INVOICE</Modal.Title>
+        <Modal.Title className="text-white">PENDING INVOICE </Modal.Title>
       </Modal.Header>
       <Modal.Body
         className="px-4 py-3"
