@@ -26,6 +26,9 @@ const defaultItem = {
 };
 
 const PurchaseForm = ({ idToEdit, onSuccess }) => {
+  const partyInputRef = useRef(null);
+  const productInputRef = useRef(null);
+
   const [vendors, setVendors] = useState([]);
   const [products, setProducts] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -693,11 +696,11 @@ const PurchaseForm = ({ idToEdit, onSuccess }) => {
                 <span className="me-3">
                   Press <kbd>F2</kbd> to add row
                 </span>
-                <span>
+                <span className="me-3">
                   Press <kbd>Esc</kbd> to cancel
-                </span>
+                </span> 
                 <span>
-                  Press <kbd>F9</kbd> to
+                  Press <kbd>F9</kbd> to add party
                 </span>
               </div>
             </Col>

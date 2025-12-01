@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import axios from "../../../Config/axios";
 const API_BASE = import.meta.env.VITE_API;
-const IMAGE_BASE = import.meta.env.VITE_API.replace(/\/api$/, "");
+const IMAGE_BASE = import.meta.env.VITE_API.replace(/\/api\/?$/, "");
 import Image from "react-bootstrap/Image";
 import Loader from "../../Loader";
 import toast from "react-hot-toast";

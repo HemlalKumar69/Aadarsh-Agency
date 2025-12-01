@@ -66,7 +66,7 @@ function DisplaySalesMan({ onEdit, refreshTrigger }) {
       selector: (row) =>
         row.photo ? (
           <Image
-            src={`${IMAGE_BASE}/Images/${row.photo}`}
+            src={`${IMAGE_BASE}/public/Images/${row.photo}`}
             roundedCircle
             width={40}
             height={40}

@@ -125,7 +125,7 @@ const ProductBillingReport = ({ onBillingDataChange, onEdit }, ref) => {
       el.scrollIntoView({
         behavior: "smooth",
         block: "center",
-        inline: "nearest"
+        inline: "nearest",
       });
     }
   }, [focusedIndex]);
@@ -794,15 +794,18 @@ const ProductBillingReport = ({ onBillingDataChange, onEdit }, ref) => {
         <div className="d-flex align-items-center gap-4 text-muted mb-0">
           <strong>Shortcuts:</strong>
           <div className="d-flex align-items-center gap-3">
-            <span>
-              <strong>New Line:</strong> Enter / F2
-            </span>
-            <span>
-              <strong>Save Row:</strong> Enter
-            </span>
-            <span>
-              <strong>Delete Row:</strong> Delete / F3
-            </span>
+            <h5>
+              Press <span className="bg-black text-white p-1 rounded">F2</span>{" "}
+              For New Line
+            </h5>
+            <h5>
+              Press <span className="bg-black text-white p-1 rounded">F3</span>{" "}
+              For Delete Row
+            </h5>
+            <h5>
+              Press <span className="bg-black text-white p-1 rounded">Enter</span>{" "}
+              For Save Row
+            </h5>
           </div>
         </div>
       </div>
@@ -988,7 +991,6 @@ const ProductBillingReport = ({ onBillingDataChange, onEdit }, ref) => {
         <div></div>
       </div>
 
-      
       {/*//! select option model item name model */}
 
       {showModal && (
@@ -1001,7 +1003,7 @@ const ProductBillingReport = ({ onBillingDataChange, onEdit }, ref) => {
             height: "100vh",
             display: "flex",
             // placeItems: "center",
-            alignItems:"start",
+            alignItems: "start",
             justifyContent: "center",
             zIndex: 9999,
           }}

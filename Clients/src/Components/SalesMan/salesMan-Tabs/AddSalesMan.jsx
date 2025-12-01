@@ -430,6 +430,7 @@ const IMAGE_BASE = import.meta.env.VITE_API
   : "";
 
 function AddSalesMan({ idToEdit, onSuccess }) {
+  const [mobileError, setMobileError] = useState(" ");
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -471,7 +472,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           }
           setFormData({
             name: s.name || "",
-            mobile: s.mobile || "",
+            mobile: s.mobile ? String(s.mobile) : "",
             city: s.city || "",
             username: s.username || "",
             password: s.password || "",
@@ -525,7 +526,17 @@ function AddSalesMan({ idToEdit, onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+     // Mobile validation
+    if (formData.mobile.length !== 10) {
+      toast.error("Mobile number must be exactly 10 digits.");
+      setMobileError("Mobile number must be exactly 10 digits.");
+      return;
+    }
+
     setLoading(true);
+
+
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (key === "beat") data.append("beat", JSON.stringify(value));
@@ -558,12 +569,32 @@ function AddSalesMan({ idToEdit, onSuccess }) {
       if (onSuccess) onSuccess();
     } catch (err) {
       toast.error(
-        `Error saving salesman: ${err.response?.data?.message || err.message}`
+        "All filed are required"
+        // `Error saving salesman: ${err.response?.data?.message || err.message}`
       );
     } finally {
       setLoading(false);
     }
   };
+    const handleMobileChange = (e) => {
+    let value = e.target.value;
+    value = e.target.value.replace(/\D/g, ""); // only digits
+    if (value.length > 10) value = value.slice(0, 10); // max 10 digits
+    setFormData((prev) => ({ ...prev, mobile: value }));
+
+    if (value.length < 10) {
+      setMobileError("Mobile number must be exactly 10 digits.");
+    } else {
+      setMobileError("");
+    }
+  };
+
+//     if (formData.mobile.length !== 10) {
+//   toast.error("Mobile number must be exactly 10 digits.");
+//   setLoading(false);
+//   return;
+// }
+//   };
 
   const handleKeyDown = (e, index, type = "input") => {
     if (["Enter", "ArrowDown"].includes(e.key)) {
@@ -601,7 +632,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           {/* Name */}
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Name </Form.Label>
+              <Form.Label>Name <span style={{ color: "red" }}>*</span></Form.Label>
               <Form.Control
                 ref={(el) => (inputRefs.current[0] = el)}
                 onKeyDown={(e) => handleKeyDown(e, 0)}
@@ -617,16 +648,60 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           {/* Mobile */}
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Mobile</Form.Label>
+              <Form.Label>Mobile <span style={{ color: "red" }}>*</span></Form.Label>
               <Form.Control
                 ref={(el) => (inputRefs.current[1] = el)}
                 onKeyDown={(e) => handleKeyDown(e, 1)}
-                type="number"
+                type="text"
                 name="mobile"
                 value={formData.mobile}
-                onChange={handleChange}
+                onChange={handleMobileChange}
+                onBlur={() => {
+                  if (formData.mobile.length !== 10) {
+                    setMobileError("Mobile number must be exactly 10 digits.");
+                  } else {
+                    setMobileError("")
+                  }
+                }}
+
+                  // // ❌ number type allows exponential like 1e5 → block that
+                  // if (value.includes("e") || value.includes("E") || value.includes("_") || value.includes("+")) {
+                  //   return;
+                  // }
+
+                  // value = value.replace(/\D/g, "");
+
+                  // ❌ Prevent more than 10 digits
+                  // if (value.length > 10) return;
+
+                  /* // ❌ Prevent less than 10 digits **when editing existing value**
+                  if (isEditing && value.length < 10) {
+                    return; // STOP user from deleting below 10 digits
+                  }
+
+                  // Update state
+                  setFormData((prev) => ({ ...prev, mobile: value }));
+
+                  // Error logic
+                  if (value.length < 10) {
+                    setMobileError("Mobile number must be exactly 10 digits.");
+                  } else {
+                    setMobileError("");
+                  }
+                }} */
+                /* onBlur={(e) => {
+                  let value = e.target.value;
+                  if (value.length !== 10) {
+                    setMobileError("Mobile number must be exactly 10 digits.");
+                  } else {
+                    setMobileError("");
+                  }
+                }} */
                 required
               />
+              {mobileError && (
+                <small style={{ color: "red", fontSize: "12px" }}>{mobileError}</small>
+              )}
             </Form.Group>
           </Col>
 
@@ -648,7 +723,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           {/* Beats */}
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Beats</Form.Label>
+              <Form.Label>Beats <span style={{ color: "red" }}>*</span></Form.Label>
               {formData.beat.map((b, index) => (
                 <Row key={index} className="mb-2 align-items-center">
                   <Col md={6}>
@@ -692,7 +767,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
                 onClick={() => addBeatField()}
                 className="mt-2"
               >
-                ➕ Add Beat
+                ➕ Add Beat 
               </Button>
             </Form.Group>
           </Col>
@@ -700,7 +775,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           {/* Username */}
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Username <span style={{ color: "red" }}>*</span></Form.Label>
               <Form.Control
                 ref={(el) =>
                   (inputRefs.current[beatStartIndex + formData.beat.length + 1] = el)
@@ -723,7 +798,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
           {/* Password */}
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Password <span style={{ color: "red" }}>*</span></Form.Label>
               <Form.Control
                 ref={(el) =>
                   (inputRefs.current[beatStartIndex + formData.beat.length + 2] = el)
@@ -764,7 +839,7 @@ function AddSalesMan({ idToEdit, onSuccess }) {
               {isEditing && existingPhoto && (
                 <div className="mt-2">
                   <img
-                    src={`${IMAGE_BASE}/Images/${existingPhoto}`}
+                    src={`${IMAGE_BASE}/public/Images/${existingPhoto}`}
                     alt="Salesman"
                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
                   />

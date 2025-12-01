@@ -64,7 +64,7 @@ const ProductList = ({ onEdit, refreshFlag }) => {
       selector: (row) =>
         row.productImg ? (
           <Image
-            src={`${IMAGE_BASE}/uploads/${row.productImg}`}
+            src={`${IMAGE_BASE}/public/Images/${row.productImg}`}
             alt={row.productImg}
             roundedCircle
             width={40}

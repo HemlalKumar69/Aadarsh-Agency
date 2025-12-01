@@ -20,7 +20,7 @@ const ledgerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // ✅ Customer Ledger
+    // ✅ Customer Ledger 
     builder
       .addCase(fetchLedgerByCustomer.pending, (state) => {
         state.loading = true;

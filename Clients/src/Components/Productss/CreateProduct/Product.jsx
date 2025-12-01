@@ -387,7 +387,7 @@ const Product = ({ onSuccess, onCancel, productToEdit }) => {
       selector: (row) =>
         row.productImg ? (
           <Image
-            src={`${IMAGE_BASE}/Images/${row.productImg}`}
+            src={`${IMAGE_BASE}/public/Images/${row.productImg}`}
             roundedCircle
             width={40}
             height={40}
@@ -482,7 +482,7 @@ const Product = ({ onSuccess, onCancel, productToEdit }) => {
                 <div className="row">
                   {/* Brand */}
                   <div className="col-md-6 mb-3">
-                    <label>Brand</label>
+                    <label>Brand </label>
                     <select
                       // ref={companyIdRef}
                       ref={(el) => (inputRefs.current[0] = el)}

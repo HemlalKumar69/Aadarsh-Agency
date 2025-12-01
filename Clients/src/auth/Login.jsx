@@ -91,11 +91,11 @@ const Auth = () => {
         />
 
         <button type="submit" style={styles.button}>
-          {isRegister ? "Register" : "Login"}
+          {isRegister ? " " : "Login"}
         </button>
 
         <p style={{ textAlign: "center", marginTop: "10px" }}>
-          {isRegister ? "Already have an account?" : "Don't have an account?"}{" "}
+          {/* {isRegister ? "Already have an account?" : "Don't have an account?"}{" "} */}
           <span
             style={styles.link}
             onClick={() => {
@@ -103,7 +103,7 @@ const Auth = () => {
               setError("");
             }}
           >
-            {isRegister ? "Login" : "Register"}
+            {isRegister ? "Login" : " "}
           </span>
         </p>
       </form>

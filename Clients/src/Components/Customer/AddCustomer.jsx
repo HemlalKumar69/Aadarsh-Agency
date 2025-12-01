@@ -310,6 +310,13 @@
 // export default AddCustomer;
 
 
+//Previous code end here
+
+
+
+
+
+
 import React, { useEffect, useState, useRef } from "react";
 import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
 import axios from "../../Config/axios";
@@ -336,6 +343,7 @@ function AddCustomer({
     balance: "",
   });
 
+  const [mobileError, setMobileError] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Array of refs for keyboard navigation
@@ -348,7 +356,7 @@ function AddCustomer({
         ledger: editingCustomer.ledger || "",
         name: editingCustomer.name || "",
         city: editingCustomer.city || "",
-        mobile: editingCustomer.mobile || "",
+        mobile: editingCustomer.mobile ? String(editingCustomer.mobile) :  "",
         address1: editingCustomer.address1 || "",
         gstNumber: editingCustomer.gstNumber || "",
         balance: editingCustomer.balance || "",
@@ -358,6 +366,17 @@ function AddCustomer({
       });
     }
   }, [editingCustomer]);
+
+
+   // ⭐ FIXED — Auto validate mobile in edit mode
+  useEffect(() => {
+    if (editingCustomer && editingCustomer.mobile) {
+      const isValid = String(editingCustomer.mobile).length === 10;
+      // const isValid = editingCustomer.mobile.length === 10;
+      setMobileError(!isValid ? "Mobile number must be exactly 10 digits." : "");
+    }
+  }, [editingCustomer]);
+
 
   // Auto focus first input on mount
   useEffect(() => {
@@ -369,8 +388,29 @@ function AddCustomer({
   }, [firstInputRef]);
 
   const handleChange = (e) => {
-    setCustomer({ ...customer, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // setCustomer({ ...customer, [e.target.name]: e.target.value });
+
+     // 🔥 MOBILE VALIDATION
+    if (name === "mobile") {
+      if (!/^\d*$/.test(value)) return; // allow only numbers
+      if (value.length > 10) return; // max 10 digits only
+
+      setCustomer((prev) => ({ ...prev, mobile: value }));
+
+      if (value.length !== 10) {
+        setMobileError("Mobile number must be exactly 10 digits.");
+      } else {
+        setMobileError("");
+      }
+
+      return;
+    }
+
+    setCustomer((prev) => ({ ...prev, [name]: value }));
+    // setCustomer({ ...customer, [name]: value });
   };
+
 
   // Keyboard navigation between inputs
   const handleKeyDown = (e, index) => {
@@ -435,6 +475,12 @@ function AddCustomer({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     // 🔥 Prevent Submit if mobile length < 10
+    if (customer.mobile.length !== 10) {
+      setMobileError("Mobile number must be exactly 10 digits.");
+      toast.error("Please fill all");
+      return;
+    }
     setLoading(true);
     try {
       if (editingCustomer) {
@@ -475,7 +521,7 @@ function AddCustomer({
   return (
     <Container className="mt-4">
       <Card>
-        <Card.Header>{editingCustomer ? "Edit" : "Add"} Customer</Card.Header>
+        <Card.Header>{editingCustomer ? "Edit" : "Add"} Customer </Card.Header>
         <Card.Body
           style={{ maxHeight: "65vh", overflowY: "auto", paddingRight: "8px" }}
         >
@@ -507,13 +553,26 @@ function AddCustomer({
                 <Form.Control
                   ref={(el) => (inputRefs.current[1] = el)}
                   onKeyDown={(e) => handleKeyDown(e, 1)}
-                  type="number"
+                  type="text"
                   name="mobile"
                   placeholder="Mobile"
                   value={customer.mobile}
                   onChange={handleChange}
+                  onBlur={(e) => {
+                    const value = e.target.value;
+                    if (value.length !== 10){
+                      setMobileError("Mobile number must be exactly 10 digits.");
+                    } else {
+                      setMobileError(" ");
+                    }
+                  }}
+                  // maxLength={10}
                   required
                 />
+                
+                {mobileError && (
+                  <p style={{ color: "red", marginTop: "5px" }}>{mobileError}</p>
+                )}
               </Col>
 
               <Col md={6} className="mb-3">
@@ -608,7 +667,12 @@ function AddCustomer({
               </Col>
             </Row>
 
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary"
+              ref={(el) => (inputRefs.current[9] = el)}  // 👈 ADD THIS
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSubmit(e);
+              }}
+            >
               {editingCustomer ? "Update Customer" : "Add Customer"}
             </Button>
           </Form>

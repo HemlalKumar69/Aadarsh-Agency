@@ -9,16 +9,35 @@ const productSchema = new mongoose.Schema({
   },
   primaryUnit: String,
   secondaryUnit: String,
-  primaryPrice: Number,
-  secondaryPrice: Number,
+  primaryPrice: {
+    type: Number,
+    set: (v) => (v == null ? v : Math.round(v * 100) / 100),
+  },
+  secondaryPrice: {
+    type: Number,
+    set: (v) => (v == null ? v : Math.round(v * 100) / 100),
+  },
   unit: { type: String }, // New field for Unit dropdown
-  mrp: { type: Number }, // New MRP field
-  salesRate: { type: Number }, // New Sales Rate field
-  purchaseRate: { type: Number }, // New Purchase Rate field
+  mrp: {
+    type: Number,
+    set: (v) => (v == null ? v : Math.round(v * 100) / 100),
+  }, // New MRP field
+  salesRate: {
+    type: Number,
+    set: (v) => (v == null ? v : Math.round(v * 100) / 100),
+  }, // New Sales Rate field
+  purchaseRate: {
+    type: Number,
+    set: (v) => (v == null ? v : Math.round(v * 100) / 100),
+  }, // New Purchase Rate field
 
   availableQty: {
     type: Number,
     default: 0,
+    validate: {
+      validator: Number.isInteger,
+      message: "availableQty must be an integer",
+    },
     immutable: function () {
       return this.isNew;
     },

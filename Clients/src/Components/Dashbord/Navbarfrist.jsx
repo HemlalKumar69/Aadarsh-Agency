@@ -53,26 +53,73 @@ const Navbarfrist = () => {
     const handleKeyNav = (event) => {
       if (!isOpen) return;
 
-      const focusedIndex = navLinksRef.current.findIndex(
+      const visibleLinks = navLinksRef.current.filter(
+        (el) => el && el.offsetParent !== null
+      );
+
+      const focusedIndex = visibleLinks.findIndex(
         (el) => el === document.activeElement
       );
 
       if (event.key === "ArrowDown") {
         event.preventDefault();
-        const nextIndex = (focusedIndex + 1) % navLinksRef.current.length;
-        navLinksRef.current[nextIndex]?.focus();
+        const nextIndex = (focusedIndex + 1) % visibleLinks.length;
+        visibleLinks[nextIndex]?.focus();
       }
       if (event.key === "ArrowUp") {
         event.preventDefault();
         const prevIndex =
-          (focusedIndex - 1 + navLinksRef.current.length) %
-          navLinksRef.current.length;
-        navLinksRef.current[prevIndex]?.focus();
+          (focusedIndex - 1 + visibleLinks.length) %
+          visibleLinks.length;
+        visibleLinks[prevIndex]?.focus();
+      }
+
+      // Enter key triggers click/navigation
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const el = document.activeElement;
+
+        if (el) {
+          // Agar active element Modify Bill button hai
+          if (el === navLinksRef.current[13]) {
+            openModifyBill(); // open modal
+            closeSidebar();   // close sidebar
+          }
+          // Baaki ke links pe default click behavior
+          else {
+            el.click();
+            closeSidebar();
+          }
+        }
       }
     };
+
+
+    //   if (event.key === "Enter") {
+    //   event.preventDefault();
+    //   const el = document.activeElement;
+    //   if (el) {
+    //     // Agar <a> ya <Link> hai
+    //     if (el.tagName === "A") {
+    //       el.click();
+    //       closeSidebar();
+    //     }
+    //     // Agar button ke andar <Link> hai
+    //     else if (el.tagName === "BUTTON") {
+    //       const link = el.querySelector("a");
+    //       if (link) link.click();
+    //       closeSidebar();
+    //     } else  {
+    //       el.click(); // ya button ka action trigger
+    //       closeSidebar();
+    //     }
+    //   }
+    // }
+    // };
     document.addEventListener("keydown", handleKeyNav);
     return () => document.removeEventListener("keydown", handleKeyNav);
-  }, [isOpen]);
+  }, [isOpen, openDropdown]);
 
   return (
     <>
@@ -89,8 +136,15 @@ const Navbarfrist = () => {
             />
           )}
           <h5 className="custom-logo mb-0">
-            <span className="custom-logo-part1">Adarsh </span>
+            <span className="custom-logo-part1">Adarsh</span>
             <span className="custom-logo-part2">Agency</span>
+          </h5>
+        </div>
+
+        <div>
+          <h5>
+            Press <span className="bg-black text-white p-1 rounded">F4</span>{" "}
+            For Open Quick Link
           </h5>
         </div>
       </div>
@@ -112,7 +166,7 @@ const Navbarfrist = () => {
       >
         <div className="sidebar-header d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
           <h5 className="m-0">
-            Aadarsh <span className="text-warning bg-white px-1">Agency</span>
+            Aadarsh  <span className="text-warning bg-white px-1">Agency</span>
           </h5>
           <FiX
             className="sidebar-toggle text-white"
@@ -209,7 +263,7 @@ const Navbarfrist = () => {
               className="btn text-white w-100 text-start d-flex align-items-center gap-2"
               ref={(el) => (navLinksRef.current[7] = el)}
             >
-              <FiLayers /> Sales <FiChevronDown size={12} />
+              <FiLayers /> Billing <FiChevronDown size={12} />
             </button>
             {openDropdown === "sales" && (
               <div className="ps-3 colored1">
@@ -260,7 +314,7 @@ const Navbarfrist = () => {
             </Link>
           </div>
 
-          <div className="dropdown mt-2">
+          {/* <div className="dropdown mt-2">
             <Link
               to="/salesmanwindow"
               ref={(el) => (navLinksRef.current[12] = el)}
@@ -270,7 +324,7 @@ const Navbarfrist = () => {
             >
               <FiLayers /> SalesMan Window
             </Link>
-          </div>
+          </div> */}
 
           <Link
             to="/test"
@@ -290,9 +344,10 @@ const Navbarfrist = () => {
               onClick={closeSidebar}
             > */}
             <button
+              ref={(el) => (navLinksRef.current[13] = el)}
               onClick={() => {
                 openModifyBill();
-                closeSidebar();
+                setTimeout(() => closeSidebar(), 100);
               }}
               // onClick={closeSidebar}
               className="btn text-white w-100 text-start d-flex align-items-center gap-2"
@@ -356,7 +411,31 @@ const Navbarfrist = () => {
             </Link>
           </div>
 
-          <div className="dropdown mt-2">
+<div className="dropdown mt-2">
+  <Link
+    to="/stock-status"
+    ref={(el) => (navLinksRef.current[18] = el)}
+    style={navLinkStyle("/stock-status")}
+    onClick={closeSidebar}
+    onKeyDown={(e) => {
+      if (e.key === "ArrowUp") {
+        toggleDropdown("previousDropdown"); // agar arrow up se kisi dropdown pe jaana hai
+      }
+      if (e.key === "Enter") {
+        closeSidebar(); // Enter press pe sidebar close ho jaaye
+        // navigate automatically ho jaayega because Link component hai
+      }
+    }}
+    className="d-flex align-items-center gap-2"
+  >
+    <FiLayers /> Stock Status
+  </Link>
+</div>
+
+
+
+
+          {/* <div className="dropdown mt-2">
             <button
               onClick={() => toggleDropdown("stockstatus")}
               onKeyDown={(e) => {
@@ -369,9 +448,28 @@ const Navbarfrist = () => {
             >
               <FiLayers /> Stock Status <FiChevronDown size={12} />
             </button>
-          </div>
+          </div> */}
 
           <div className="dropdown mt-2">
+            <Link
+              to="/stock-sale-analysis"
+              ref={(el) => (navLinksRef.current[19] = el)}
+              style={navLinkStyle("/stock-sale-analysis")}
+              onClick={closeSidebar}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp") {
+                  toggleDropdown("stockstatus");
+                }
+              }}
+              className="d-flex align-items-center gap-2"
+            >
+              <FiLayers /> Stock And Sale Analysis
+            </Link>
+          </div>
+
+
+
+          {/* <div className="dropdown mt-2">
             <button
               onClick={() => toggleDropdown("stocksale")}
               onKeyDown={(e) => {
@@ -387,7 +485,7 @@ const Navbarfrist = () => {
             >
               <FiLayers /> Stock And Sale Analysis <FiChevronDown size={12} />
             </button>
-          </div>
+          </div> */}
 
           <div className="dropdown mt-2">
             <button
@@ -407,7 +505,20 @@ const Navbarfrist = () => {
             </button>
           </div>
 
+
           <Link
+            to="/today-gross-profit"
+            ref={(el) => (navLinksRef.current[21] = el)}
+            style={navLinkStyle("/today-gross-profit")}
+            onClick={closeSidebar}
+            className="d-flex align-items-center gap-2"
+          >
+            <FiLayers /> Today Gross Profit
+          </Link>
+
+
+
+          {/* <Link
             to="#"
             ref={(el) => (navLinksRef.current[21] = el)}
             style={navLinkStyle("/")}
@@ -415,9 +526,9 @@ const Navbarfrist = () => {
             className="d-flex align-items-center gap-2"
           >
             <FiLayers /> Today Gross Profit
-          </Link>
+          </Link> */}
 
-          <div className="dropdown mt-2">
+          {/* <div className="dropdown mt-2">
             <button
               onClick={() => toggleDropdown("billing")}
               onKeyDown={(e) => {
@@ -430,7 +541,7 @@ const Navbarfrist = () => {
             >
               <FiLayers /> Billing <FiChevronDown size={12} />
             </button>
-          </div>
+          </div> */}
 
           <div className="dropdown mt-2">
             <button
@@ -442,6 +553,12 @@ const Navbarfrist = () => {
                 if (e.key === "ArrowUp") {
                   toggleDropdown("billing");
                 }
+                // 👉 ENTER PRESS FIX
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  // setSidebarOpen(false);
+                  window.location.href = "/reports"; // Navigate to Reports
+                }
               }}
               className="btn text-white w-100 text-start d-flex align-items-center gap-2"
               ref={(el) => (navLinksRef.current[23] = el)}
@@ -449,6 +566,7 @@ const Navbarfrist = () => {
             >
               <Link
                 to="reports"
+                onClick={() => setSidebarOpen(false)}
                 className="text-white text-decoration-none d-flex align-items-center gap-2"
               >
                 <FiLayers /> Report <FiChevronDown size={13} />

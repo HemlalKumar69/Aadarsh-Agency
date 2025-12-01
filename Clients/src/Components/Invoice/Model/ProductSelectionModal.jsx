@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react";
-const IMAGE_BASE = "https://your-base-url.com"; // Change as per your config
+const IMAGE_BASE = import.meta.env.VITE_API
+  ? import.meta.env.VITE_API.replace(/\/api$/, "")
+  : "";
 
 function ProductSelectionModal({
   show,
@@ -112,7 +114,7 @@ function ProductSelectionModal({
                 <td>
                   {product.productImg ? (
                     <img
-                      src={`${IMAGE_BASE}/Images/${product.productImg}`}
+                      src={`${IMAGE_BASE}/public/Images/${product.productImg}`}
                       alt="Product"
                       width={40}
                       height={40}

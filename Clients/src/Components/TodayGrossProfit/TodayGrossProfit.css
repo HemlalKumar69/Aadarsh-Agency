@@ -1,0 +1,70 @@
+/* FULL SCREEN BACKGROUND */
+.gp-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #f3f4f6;
+    padding: 20px;
+}
+
+/* TITLE */
+.gp-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.gp-title span {
+    color: #1e40af;
+}
+
+/* TABLE BOX FULL WIDTH */
+.gp-box {
+    background: white;
+    padding: 20px;
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* TABLE */
+.gp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+/* HEADER */
+.gp-table th {
+    background: #e5e7eb;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* ROWS */
+.gp-table td {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+}
+
+/* TOTAL ROW */
+.gp-total {
+    background: #f3f4f6;
+    font-weight: bold;
+}
+
+.gp-profit {
+    background: #d1fae5;
+    font-weight: bold;
+    color: #065f46;
+}
+
+/* CENTER TEXT */
+.gp-center {
+    text-align: center;
+}

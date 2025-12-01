@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 import { FaPrint, FaEdit, FaTrash } from "react-icons/fa";
 
+
+
+
 const DisplayInvoice = () => {
+  const searchRef = useRef(null);
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterText, setFilterText] = useState("");
@@ -28,9 +32,24 @@ const DisplayInvoice = () => {
     }
   };
 
-  useEffect(() => {
-    fetchInvoices();
-  }, []);
+
+ useEffect(() => {
+  if (!loading) {
+    setTimeout(() => {
+      searchRef.current?.focus();
+    }, 100);
+  }
+  fetchInvoices();
+}, [loading]);
+
+
+
+  // useEffect(() => {
+  //   if (searchRef.current) {
+  //   searchRef.current.focus();
+  // }
+  //   fetchInvoices();
+  // }, []);
 
   // Filter invoices based on customer name or product name
   const filteredInvoices = invoices.filter((inv) => {
@@ -69,17 +88,21 @@ const DisplayInvoice = () => {
     }
   };
 
-  if (loading) {
-    return <Loader />;
-  }
+  {loading && <Loader />}
+
+
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
     <div className="w-full mt-4 px-3">
-      <h2 className="mb-4">All Invoices</h2>
+      <h2 className="mb-4">All Invoices </h2>
 
       {/* Search and Row Per Page */}
       <div className="d-flex justify-content-between mb-2">
         <Form.Control
+          ref={searchRef}
           type="text"
           placeholder="Search by customer or product..."
           value={filterText}

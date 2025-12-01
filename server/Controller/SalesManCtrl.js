@@ -7,7 +7,22 @@ const createSalesman = async (req, res) => {
       data.photo = req.file.filename;
     }
 
-    data.beat = JSON.parse(data.beat); // ensure beat is parsed to array
+    // Safely parse beat into an array if provided in stringified form
+    if (typeof data.beat === "string") {
+      try {
+        data.beat = JSON.parse(data.beat);
+      } catch (e) {
+        return res.status(400).json({ message: "Invalid beat format (string)." });
+      }
+    } else if (Array.isArray(data.beat) && typeof data.beat[0] === "string") {
+      try {
+        data.beat = JSON.parse(data.beat[0]);
+      } catch (e) {
+        return res
+          .status(400)
+          .json({ message: "Invalid beat format (array of string)." });
+      }
+    }
 
     const newSalesman = new Salesman(data);
     await newSalesman.save();
