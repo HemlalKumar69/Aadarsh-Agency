@@ -36,13 +36,13 @@ const VendorLedger = () => {
   const fetchLedger = async () => {
     if (!selectedVendor) return alert("Please select a vendor");
 
-    const res = await axios.get(`/vendor/ledger/${selectedVendor._id}`, {
+    const res = await axios.get(`/ledger/${selectedVendor._id}`, {
       params: { startDate, endDate },
     });
 
     setLedgerEntries(res.data.data || []);
     setCurrentPage(1);
-  };
+  }
 
   // ✅ Keyboard navigation among fields
   const handleKeyDown = (e) => {

@@ -28,6 +28,9 @@ const authAdmin = require("./Routes/auth.routes.js");
 const total = require("./Routes/total.routes.js");
 const reportsRoutes = require("./Routes/reports.routes");
 
+const ledgerRoutes = require("./Routes/ledger.routes.js");
+
+
 // ---------- MIDDLEWARE ----------
 app.use(morgan("dev"));
 app.use(
@@ -71,6 +74,9 @@ app.use("/api/logout", Logout);
 app.use("/api/total", total);
 app.use("/api/auth", authAdmin);
 app.use("/api/reports", reportsRoutes);
+
+app.use("/api/ledger", ledgerRoutes);
+
 
 // ---------- 404 HANDLER ----------
 app.use((req, res, next) => {

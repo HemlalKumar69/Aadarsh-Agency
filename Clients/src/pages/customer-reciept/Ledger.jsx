@@ -251,19 +251,37 @@ const Ledger = () => {
   const fetchLedger = async () => {
     if (!selectedCustomer) return alert("Please select a customer");
     try {
-      const res = await axios.get("/ledger", {
+      const res = await axios.get(`/ledger/${selectedCustomer._id}`, {
         params: { customerId: selectedCustomer._id, startDate, endDate },
       });
-      setLedgerEntries(res.data || []);
+
+      console.log("API Response:", res.data);
+
+      // FIX: Ensure we always get an array
+      const entries = Array.isArray(res.data?.data)
+        ? res.data.data
+        : Array.isArray(res.data)
+          ? res.data
+          : [];
+
+      setLedgerEntries(entries);
     } catch (error) {
       console.error("Error fetching ledger:", error);
       alert("Failed to fetch ledger data");
     }
   };
 
+  
+  //     setLedgerEntries(res.data || []);
+  //   } catch (error) {
+  //     console.error("Error fetching ledger:", error);
+  //     alert("Failed to fetch ledger data");
+  //   }
+  // };
+
   return (
     <Container fluid className="p-4">
-      <h2 className="mb-4">Customer Ledger</h2>
+      <h2 className="mb-4">Customer Ledger </h2>
       <Row className="mb-4">
         {/* Customer */}
         <Col md={3}>

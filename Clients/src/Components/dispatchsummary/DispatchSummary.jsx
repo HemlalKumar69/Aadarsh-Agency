@@ -113,7 +113,7 @@ const DispatchSummary = () => {
         <div style={{ padding: "20px", fontFamily: "Arial" }}>
             
             <div style={{ textAlign: "center", marginBottom: "20px" }}>
-                <h2 style={{ margin: "5px 0" }}>DISPATCH SUMMARY (Date: Today)</h2>
+                <h2 style={{ margin: "5px 0" }}>DISPATCH SUMMARY (Date: 02-12-25)</h2>
                 
             </div>
             
