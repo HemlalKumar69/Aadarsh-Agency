@@ -148,12 +148,12 @@ const Navbarfrist = () => {
           </h5>
         </div>
 
-        <div>
+        {/* <div>
           <h5>
             Press <span className="bg-black text-white p-1 rounded">F4</span>{" "}
             For Open Quick Link
           </h5>
-        </div>
+        </div> */}
 
       </div>
 
@@ -419,26 +419,26 @@ const Navbarfrist = () => {
             </Link>
           </div>
 
-<div className="dropdown mt-2">
-  <Link
-    to="/stock-status"
-    ref={(el) => (navLinksRef.current[18] = el)}
-    style={navLinkStyle("/stock-status")}
-    onClick={closeSidebar}
-    onKeyDown={(e) => {
-      if (e.key === "ArrowUp") {
-        toggleDropdown("previousDropdown"); // agar arrow up se kisi dropdown pe jaana hai
-      }
-      if (e.key === "Enter") {
-        closeSidebar(); // Enter press pe sidebar close ho jaaye
-        // navigate automatically ho jaayega because Link component hai
-      }
-    }}
-    className="d-flex align-items-center gap-2"
-  >
-    <FiLayers /> Stock Status
-  </Link>
-</div>
+          <div className="dropdown mt-2">
+            <Link
+              to="/stock-status"
+              ref={(el) => (navLinksRef.current[18] = el)}
+              style={navLinkStyle("/stock-status")}
+              onClick={closeSidebar}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp") {
+                  toggleDropdown("previousDropdown"); // agar arrow up se kisi dropdown pe jaana hai
+                }
+                if (e.key === "Enter") {
+                  closeSidebar(); // Enter press pe sidebar close ho jaaye
+                  // navigate automatically ho jaayega because Link component hai
+                }
+              }}
+              className="d-flex align-items-center gap-2"
+            >
+              <FiLayers /> Stock Status
+            </Link>
+          </div>
 
 
 
@@ -495,7 +495,7 @@ const Navbarfrist = () => {
             </button>
           </div> */}
 
-          <div className="dropdown mt-2">
+          {/* <div className="dropdown mt-2">
             <button
               onClick={() => toggleDropdown("dispatch")}
               onKeyDown={(e) => {
@@ -511,6 +511,27 @@ const Navbarfrist = () => {
             >
               <FiLayers /> Dispatch Summary <FiChevronDown size={12} />
             </button>
+          </div> */}
+
+          <div className="dropdown mt-2">
+            <Link
+              to="/dispatch-summary"
+              ref={(el) => (navLinksRef.current[20] = el)}
+              style={navLinkStyle("/dispatch-summary")}
+              onClick={() => {
+                closeSidebar(); // Sidebar close on mouse click
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  closeSidebar(); // close sidebar when pressing Enter
+                  document.activeElement.click(); // trigger route navigation
+                }
+              }}
+              className="d-flex align-items-center gap-2"
+            >
+              <FiLayers /> Dispatch Summary
+            </Link>
           </div>
 
 

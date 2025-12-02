@@ -16,8 +16,8 @@ const ShortcutModal = () => {
                 <h3 style={styles.heading}>1. Dashboard</h3>
 
                 <div style={styles.list}>
-                    <p>press <b>Shift + S</b> to Open Sidebar</p>
-                    <p>press <b>F4</b> to open Quick Link</p>
+                    <p> → press <b>Shift + S</b> to Open Sidebar</p>
+                    <p> → press <b>F4</b> to open Quick Link</p>
                 </div>
 
                 {/*   ADD NEW BILLING PAGE */}
@@ -25,10 +25,10 @@ const ShortcutModal = () => {
                 <h3 style={styles.heading}>2. Billing - Add New Billing Page</h3>
 
                 <div style={styles.list}>
-                    <p>press <b>F2</b> to Add New Line</p>
-                    <p>press <b>F3</b> for Delete Selected Row</p>
-                    <p>press <b>Enter</b> for Save Row</p>
-                    <p>press <b>F10</b> to Submit Bill</p>
+                    <p> → press <b>F2</b> to Add New Line</p>
+                    <p> → press <b>F3</b> for Delete Selected Row</p>
+                    <p> → press <b>Enter</b> for Save Row</p>
+                    <p> → press <b>F10</b> to Submit Bill</p>
                 </div>
 
                 {/*  PURCHASE BILL SHORTCUTS */}
@@ -36,11 +36,11 @@ const ShortcutModal = () => {
                 <h3 style={styles.heading}>3. Purchase Bill – Purchase Page</h3>
 
                 <div style={styles.list}>
-                    <p>press <b>Enter</b> to Navigate</p>
-                    <p>press <b>F2</b> to Add New Row</p>
-                    <p>press <b>Esc</b> to Cancel Row</p>
-                    <p>press <b>F9</b> to Add Party</p>
-                    <p>press <b>F10</b> to Submit Purchase Bill</p>
+                    <p> → press <b>Enter</b> to Navigate</p>
+                    <p> → press <b>F2</b> to Add New Row</p>
+                    <p> → press <b>Esc</b> to Cancel Row</p>
+                    <p> → press <b>F9</b> to Add Party</p>
+                    <p> → press <b>F10</b> to Submit Purchase Bill</p>
                 </div>
 
                 <button onClick={closeShortcut} style={styles.closeBtn}>Close</button>

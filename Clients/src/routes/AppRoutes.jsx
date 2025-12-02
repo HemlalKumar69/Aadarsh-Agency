@@ -31,6 +31,9 @@ import StockSaleAnalysis from "../Components/StockAndSales/StockSaleAnalysis";
 import StockStatus from "../components/stockStatus/stockstatus";
 import TodayGrossProfit from "../Components/TodayGrossProfit/TodayGrossProfit";
 
+import DispatchSummary from "../Components/dispatchsummary/DispatchSummary";
+
+
 
 // ✅ ProtectedRoute component
 const ProtectedRoute = ({ children }) => {
@@ -83,6 +86,7 @@ const AppRoutes = () => {
         <Route path="/stock-sale-analysis" element={<StockSaleAnalysis />} />
         <Route path="/stock-status" element={<StockStatus />} />
         <Route path="/today-gross-profit" element={<TodayGrossProfit />} />
+        <Route path="/dispatch-summary" element={<DispatchSummary  />} />
       </Route>
     </Routes>
   );
