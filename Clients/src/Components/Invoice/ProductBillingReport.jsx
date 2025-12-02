@@ -794,18 +794,15 @@ const ProductBillingReport = ({ onBillingDataChange, onEdit }, ref) => {
         <div className="d-flex align-items-center gap-4 text-muted mb-0">
           <strong>Shortcuts:</strong>
           <div className="d-flex align-items-center gap-3">
-            <h5>
-              Press <span className="bg-black text-white p-1 rounded">F2</span>{" "}
-              For New Line
-            </h5>
-            <h5>
-              Press <span className="bg-black text-white p-1 rounded">F3</span>{" "}
-              For Delete Row
-            </h5>
-            <h5>
-              Press <span className="bg-black text-white p-1 rounded">Enter</span>{" "}
-              For Save Row
-            </h5>
+            <span>
+              press <strong className="bg-black text-white p-1 rounded-1"> F2</strong> to New Line
+            </span>
+            <span>
+              press <strong className="bg-black text-white p-1 rounded-1"> Enter</strong> to Save Row
+            </span>
+            <span>
+              press <strong className="bg-black text-white p-1 rounded-1"> F3</strong> Delete Row
+            </span>
           </div>
         </div>
       </div>

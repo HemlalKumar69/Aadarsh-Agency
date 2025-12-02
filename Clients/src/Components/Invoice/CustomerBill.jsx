@@ -390,7 +390,7 @@ const CustomerBill = ({ onBillingDataChange }, ref) => {
         transform: "translateX(-50%)",
       }}
     >
-      <h2 className="text-center mb-4">Product Invoice </h2>
+      <h2 className="text-center mb-4">Product Invoice   </h2>
       <div className="mt-3 p-3 bg-light border rounded">
         <h5>Total Items: {rows.length}</h5>
         <div className="d-flex align-items-center gap-4 text-muted mb-0">

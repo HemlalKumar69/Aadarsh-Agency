@@ -681,11 +681,17 @@ const CustomerBilling = ({
 
                 if (e.key === "ArrowDown") {
                   e.preventDefault();
-                  newIndex = salesmanFocusedIndex < filteredSalesmen.length - 1 ? salesmanFocusedIndex + 1 : 0;
+                  newIndex =
+                    salesmanFocusedIndex < filteredSalesmen.length - 1
+                      ? salesmanFocusedIndex + 1
+                      : 0;
                   setSalesmanFocusedIndex(newIndex);
                 } else if (e.key === "ArrowUp") {
                   e.preventDefault();
-                  newIndex = salesmanFocusedIndex > 0 ? salesmanFocusedIndex - 1 : filteredSalesmen.length - 1;
+                  newIndex =
+                    salesmanFocusedIndex > 0
+                      ? salesmanFocusedIndex - 1
+                      : filteredSalesmen.length - 1;
                   setSalesmanFocusedIndex(newIndex);
                 } else if (e.key === "Enter") {
                   e.preventDefault();
@@ -723,10 +729,12 @@ const CustomerBilling = ({
                   {filteredSalesmen.map((s, index) => (
                     <tr
                       key={s._id}
-                      id={`salesman-row-${index}`}   // ← add this
+                      id={`salesman-row-${index}`} // ← add this
                       onClick={() => handleSalesmanSelect(s)}
                       onMouseEnter={() => setSalesmanFocusedIndex(index)}
-                      className={salesmanFocusedIndex === index ? "table-active" : ""}
+                      className={
+                        salesmanFocusedIndex === index ? "table-active" : ""
+                      }
                       style={{ cursor: "pointer" }}
                     >
                       <td>{s.name}</td>
@@ -747,26 +755,22 @@ const CustomerBilling = ({
 };
 export default CustomerBilling;
 
-
-
-
-
-// <div className="container mt-4">
-//   <h4>Customer Billing</h4>
-//   <form>
-//     <div className="row">
-//       {/* Salesman Selector */}
-//       <div className="form-group col-md-6">
-//         <label>Salesman</label>
-//         <input
-//           type="text"
-//           className="form-control"
-//           placeholder="Select Salesman"
-//           value={selectedSalesman?.name || ""}
-//           readOnly
-//           onFocus={() => setShowSalesmanModal(true)}
-//         />
-//       </div>
+    // <div className="container mt-4">
+    //   <h4>Customer Billing</h4>
+    //   <form>
+    //     <div className="row">
+    //       {/* Salesman Selector */}
+    //       <div className="form-group col-md-6">
+    //         <label>Salesman</label>
+    //         <input
+    //           type="text"
+    //           className="form-control"
+    //           placeholder="Select Salesman"
+    //           value={selectedSalesman?.name || ""}
+    //           readOnly
+    //           onFocus={() => setShowSalesmanModal(true)}
+    //         />
+    //       </div>
 
 //       {/* Beat Selector */}
 //       <div className="form-group col-md-6">

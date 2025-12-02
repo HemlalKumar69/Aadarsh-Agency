@@ -806,7 +806,7 @@ const PurchaseForm = ({ idToEdit, onSuccess }) => {
           </Button>
 
           {/* Centered Submit Button */}
-          <p className=" d-flex justify-content-center">press f10 to submit</p>
+          <p className=" d-flex justify-content-center p-1"> press  <span className="bg-black text-white p-1 rounded-1">  F10 </span> to submit </p>
           <div className="d-flex justify-content-center">
             <Button
               variant="success"

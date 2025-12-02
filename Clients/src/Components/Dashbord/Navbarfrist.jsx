@@ -143,10 +143,18 @@ const Navbarfrist = () => {
 
         <div>
           <h5>
+            Press <span className="bg-black text-white p-1 rounded">ctrl + k</span>{" "}
+            to Open All shortcut keys
+          </h5>
+        </div>
+
+        <div>
+          <h5>
             Press <span className="bg-black text-white p-1 rounded">F4</span>{" "}
             For Open Quick Link
           </h5>
         </div>
+
       </div>
 
       {/* Sidebar */}

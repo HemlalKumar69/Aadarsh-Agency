@@ -7,21 +7,30 @@ import { useModal } from "./Components/global/ModalContext";
 import PopupModel from "./Components/global/PopupModel";
 import ModifyBill from "./Components/ModifyBill";
 
+import ShortcutModal from "./Components/global/ShortcutModal";
+
 const App = () => {
-  const { openModal } = useModal();
+  const { openModal, openShortcut } = useModal();
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // ALT + A = open main modal
       if (e.altKey && e.key.toLowerCase() === "a") {
         e.preventDefault();
         openModal();
+      }
+
+      // CTRL + K = open shortcut modal
+      if (e.ctrlKey && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        openShortcut();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [openModal]);
+  }, [openModal, openShortcut]);
 
   return (
     <BrowserRouter>
@@ -29,6 +38,7 @@ const App = () => {
       <AppRoutes />
       <PopupModel />
       <MyModal />
+      <ShortcutModal />
     </BrowserRouter>
   );
 };
